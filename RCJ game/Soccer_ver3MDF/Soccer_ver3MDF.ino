@@ -11,12 +11,12 @@
 //モータPIN番号(ハード依存)
 #define M1a 4
 #define M1b 5
-#define M2a 2
-#define M2b 3
+#define M2a 8
+#define M2b 9
 #define M3a 6
 #define M3b 7
-#define M4a 8
-#define M4b 9
+#define M4a 2
+#define M4b 3
 #define echoPin1 23 // Echo Pin
 #define trigPin1 22 // Trigger Pin
 #define echoPin2 25 // Echo Pin
@@ -201,6 +201,8 @@ void loop() {
     delay(50); // バウンシング解消用の遅延
   }
   old_val = val;
+  Serial.print(val);
+  Serial.print("\n");
 
 sensors_event_t event;
   bno.getEvent(&event);
@@ -426,7 +428,7 @@ if(state == 1){
  
 
      
-     if((event.orientation.x) < 13 ) {
+     if((event.orientation.x) < 15 ) {
       analogWrite(M1a, x1a);
       analogWrite(M1b, x1b);
       analogWrite(M2a, x2a);
@@ -437,7 +439,7 @@ if(state == 1){
       analogWrite(M4b, x4b);
     SSWsens();
       
-     }else if((event.orientation.x) > 347){
+     }else if((event.orientation.x) > 345){
       analogWrite(M1a, x1a);
       analogWrite(M1b, x1b);
       analogWrite(M2a, x2a);
@@ -501,60 +503,59 @@ void Stop(void){
     analogWrite(M4b,0);
 }
 void siseir(void){
-    analogWrite(M1a,42);  //モータ全て 反時計回り
+    analogWrite(M1a,43);  //モータ全て 時計回り
     analogWrite(M1b,0);
-    analogWrite(M2a,0);
-    analogWrite(M2b,42);
-    analogWrite(M3a,42);
+    analogWrite(M2a,43);
+    analogWrite(M2b,0);
+    analogWrite(M3a,43);
     analogWrite(M3b,0);
-    analogWrite(M4a,42);
-    analogWrite(M4b,0);
+    analogWrite(M4a,0);
+    analogWrite(M4b,43);
     
     
 }
 void siseil(void){
     analogWrite(M1a,0);  //モータ全て 反時計回り
-    analogWrite(M1b,42);
-    analogWrite(M2a,42);
-    analogWrite(M2b,0);
+    analogWrite(M1b,43);
+    analogWrite(M2a,0);
+    analogWrite(M2b,43);
     analogWrite(M3a,0);
-    analogWrite(M3b,42);
-    analogWrite(M4a,0);
-    analogWrite(M4b,42);
+    analogWrite(M3b,43);
+    analogWrite(M4a,43);
+    analogWrite(M4b,0);
     
 }
 void SSWsens(void){
   ssw1();
 ssw2();
-  if(Distance1 <= 25 ){
-  analogWrite(2,0);
-  analogWrite(3,200);
+  if(Distance1 <= 25){
+  analogWrite(M1a,200);
+  analogWrite(M1b,0);
  
-  analogWrite(4,0);
-  analogWrite(5,200);
+  analogWrite(M2a,200);
+  analogWrite(M2b,0);
   
-  analogWrite(6,0);
-  analogWrite(7,200);
+  analogWrite(M3a,0);
+  analogWrite(M3b,200);
  
-  analogWrite(8,200);
-  analogWrite(9,0);
-  digitalWrite(buzzer,HIGH);
+  analogWrite(M4a,200);
+  analogWrite(M4b,0);
+ digitalWrite(buzzer,HIGH);
  delay(50);
  digitalWrite(buzzer,LOW);
  delay(50);
- delayMicroseconds(20);
   }else if(Distance2 <= 25 ){
-  analogWrite(2,200);
-  analogWrite(3,0);
+  analogWrite(M1a,0);
+  analogWrite(M1b,200);
 
-  analogWrite(4,200);
-  analogWrite(5,0);
+  analogWrite(M2a,0);
+  analogWrite(M2b,200);
   
-  analogWrite(6,200);
-  analogWrite(7,0);
+  analogWrite(M3a,200);
+  analogWrite(M3b,0);
  
-  analogWrite(8,0);
-  analogWrite(9,200);
+  analogWrite(M4a,0);
+  analogWrite(M4b,200);
   digitalWrite(buzzer,HIGH);
  delay(50);
  digitalWrite(buzzer,LOW);
