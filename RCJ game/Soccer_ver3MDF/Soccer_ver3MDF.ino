@@ -11,10 +11,10 @@
 //モータPIN番号(ハード依存)
 #define M1a 4
 #define M1b 5
-#define M2a 8
-#define M2b 9
-#define M3a 6
-#define M3b 7
+#define M2a 6
+#define M2b 7
+#define M3a 8
+#define M3b 9
 #define M4a 2
 #define M4b 3
 #define echoPin1 23 // Echo Pin
