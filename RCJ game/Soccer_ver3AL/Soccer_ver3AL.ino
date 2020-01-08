@@ -11,10 +11,10 @@
 //モータPIN番号(ハード依存)
 #define M1a 4
 #define M1b 5
-#define M2a 6
-#define M2b 7
-#define M3a 8
-#define M3b 9
+#define M2a 8
+#define M2b 9
+#define M3a 6
+#define M3b 7
 #define M4a 2
 #define M4b 3
 #define echoPin1 23 // Echo Pin
@@ -503,59 +503,59 @@ void Stop(void){
     analogWrite(M4b,0);
 }
 void siseir(void){
-    analogWrite(M1a,43);  //モータ全て 反時計回り
+    analogWrite(M1a,43);  //モータ全て 時計回り
     analogWrite(M1b,0);
-    analogWrite(M2a,0);
-    analogWrite(M2b,43);
+    analogWrite(M2a,43);
+    analogWrite(M2b,0);
     analogWrite(M3a,43);
     analogWrite(M3b,0);
-    analogWrite(M4a,43);
-    analogWrite(M4b,0);
+    analogWrite(M4a,0);
+    analogWrite(M4b,43);
     
     
 }
 void siseil(void){
     analogWrite(M1a,0);  //モータ全て 反時計回り
     analogWrite(M1b,43);
-    analogWrite(M2a,43);
-    analogWrite(M2b,0);
+    analogWrite(M2a,0);
+    analogWrite(M2b,43);
     analogWrite(M3a,0);
     analogWrite(M3b,43);
-    analogWrite(M4a,0);
-    analogWrite(M4b,43);
+    analogWrite(M4a,43);
+    analogWrite(M4b,0);
     
 }
 void SSWsens(void){
   ssw1();
 ssw2();
   if(Distance1 <= 25){
-  analogWrite(2,0);
-  analogWrite(3,200);
+  analogWrite(M1a,200);
+  analogWrite(M1b,0);
  
-  analogWrite(4,0);
-  analogWrite(5,200);
+  analogWrite(M2a,200);
+  analogWrite(M2b,0);
   
-  analogWrite(6,0);
-  analogWrite(7,200);
+  analogWrite(M3a,0);
+  analogWrite(M3b,200);
  
-  analogWrite(8,200);
-  analogWrite(9,0);
+  analogWrite(M4a,200);
+  analogWrite(M4b,0);
  digitalWrite(buzzer,HIGH);
  delay(50);
  digitalWrite(buzzer,LOW);
  delay(50);
   }else if(Distance2 <= 25 ){
-  analogWrite(2,200);
-  analogWrite(3,0);
+  analogWrite(M1a,0);
+  analogWrite(M1b,200);
 
-  analogWrite(4,200);
-  analogWrite(5,0);
+  analogWrite(M2a,0);
+  analogWrite(M2b,200);
   
-  analogWrite(6,200);
-  analogWrite(7,0);
+  analogWrite(M3a,200);
+  analogWrite(M3b,0);
  
-  analogWrite(8,0);
-  analogWrite(9,200);
+  analogWrite(M4a,0);
+  analogWrite(M4b,200);
   digitalWrite(buzzer,HIGH);
  delay(50);
  digitalWrite(buzzer,LOW);
